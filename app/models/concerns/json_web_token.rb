@@ -32,10 +32,4 @@ class JsonWebToken
   def self.expired(payload)
     Time.at(payload['exp']) < Time.now
   end
-
-  private
-
-  def hmac_secret
-    Rails.application.secrets.secret_key_base || ENV["SECRET_KEY_BASE"]
-  end
 end

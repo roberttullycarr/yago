@@ -33,7 +33,6 @@ class User < ApplicationRecord
   private
 
   def generate_token(token_payload)
-    puts "in the generate token"
     JsonWebToken.encode(token_payload)
   end
 
@@ -44,7 +43,6 @@ class User < ApplicationRecord
       email: email,
       exp: 1.hour.from_now.to_i
     }
-    puts "payload: #{payload}"
     # set login_token to validate last sent login token
     self.login_token = generate_token(payload)
     save!
@@ -52,6 +50,10 @@ class User < ApplicationRecord
 
   # returns the magic link which is to be included in the email
   def login_link
-    ActionMailer::Base.default_url_options[:host] + "/dashboard?login_token=#{login_token}"
+    params = {
+      id: id,
+      login_token: login_token,
+    }
+    "#{ActionMailer::Base.default_url_options[:host]}/dashboard?#{params.to_query}"
   end
 end
