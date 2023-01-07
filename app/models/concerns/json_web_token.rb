@@ -5,7 +5,7 @@ class JsonWebToken
   def self.encode(payload)
     puts "in the encode"
     puts payload
-    pus Rails.application.secrets.secret_key_base
+    puts Rails.application.secrets.secret_key_base
     payload.reverse_merge!(meta)
     JWT.encode(payload, Rails.application.secrets.secret_key_base)
   end
