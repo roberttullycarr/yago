@@ -33,7 +33,7 @@ class User < ApplicationRecord
   private
 
   def generate_token(token_payload)
-    logger.debug "in the generate token"
+    puts "in the generate token"
     JsonWebToken.encode(token_payload)
   end
 
@@ -44,7 +44,7 @@ class User < ApplicationRecord
       email: email,
       exp: 1.hour.from_now.to_i
     }
-    logger.debug "payload: #{payload}"
+    puts "payload: #{payload}"
     # set login_token to validate last sent login token
     self.login_token = generate_token(payload)
     save!
