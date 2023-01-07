@@ -32,6 +32,10 @@ class User < ApplicationRecord
 
   private
 
+  def generate_token(token_payload)
+    JsonWebToken.encode(token_payload)
+  end
+
   # generates login token to authorize user
   def generate_login_token
     # create a login_token and set it up to expire in 60 minutes
@@ -47,9 +51,5 @@ class User < ApplicationRecord
   # returns the magic link which is to be included in the email
   def login_link
     ActionMailer::Base.default_url_options[:host] + "/dashboard?login_token=#{login_token}"
-  end
-  
-  def generate_token(token_payload)
-    JsonWebToken.encode(token_payload)
   end
 end
