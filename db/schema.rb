@@ -10,13 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_06_130657) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_06_143836) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entity_profiles", force: :cascade do |t|
+    t.string "name"
+    t.integer "cover_value"
+    t.integer "deductible_value"
+    t.integer "legal_value"
+    t.text "cover_description"
+    t.text "deductible_description"
+    t.text "legal_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_entities", force: :cascade do |t|
+    t.bigint "annual_revenue"
+    t.string "enterprise_number"
+    t.string "legal_name"
+    t.boolean "natural_person"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_legal_entities_on_user_id"
+  end
+
+  create_table "nacebel_codes", force: :cascade do |t|
+    t.bigint "code"
+    t.text "label"
+    t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quotes", force: :cascade do |t|
+    t.boolean "available"
+    t.bigint "coverage_ceiling"
+    t.bigint "deductible"
+    t.string "quote_id"
+    t.string "coverage_ceiling_formula"
+    t.string "deductible_formula"
+    t.decimal "after_delivery_premium"
+    t.decimal "public_liability_premium"
+    t.decimal "professional_indemity_premium"
+    t.decimal "entrusted_objects_premium"
+    t.decimal "legal_expenses_premium"
+    t.bigint "legal_entity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_entity_id"], name: "index_quotes_on_legal_entity_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.string "phone_number"
     t.string "address_one"
     t.string "address_two"
     t.string "address_city"

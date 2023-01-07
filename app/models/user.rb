@@ -4,6 +4,9 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false },
     presence: true
 
+  has_many :legal_entities, dependent: :destroy
+  has_many :quotes, through: :legal_entities
+
   before_save { self.email = email.downcase }
 
   def send_magic_link
