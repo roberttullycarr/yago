@@ -1,6 +1,5 @@
 class Api::V1::AuthenticationController < ApplicationController
   def create
-    binding.pry
     # if a user exists in the db, find then by their email, and then send them a magic link
     user = User.find_by(email: params[:user][:email])
 
