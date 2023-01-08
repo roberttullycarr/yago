@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'authentication/create'
       get 'sessions/create'
+      resources :users, only: %i[create show update]
+      resources :entity_codes, only: %i[create]
       resources :legal_entities, only: %i[index show create destroy]
+      resources :quotes, only: %i[create]
     end
   end
 end

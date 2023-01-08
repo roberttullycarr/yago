@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_06_143836) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_07_170447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entity_codes", force: :cascade do |t|
+    t.bigint "legal_entity_id", null: false
+    t.bigint "nacebel_code_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_entity_id"], name: "index_entity_codes_on_legal_entity_id"
+    t.index ["nacebel_code_id"], name: "index_entity_codes_on_nacebel_code_id"
+  end
+
+  create_table "entity_profile_codes", force: :cascade do |t|
+    t.bigint "entity_profile_id", null: false
+    t.bigint "nacebel_code_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_profile_id"], name: "index_entity_profile_codes_on_entity_profile_id"
+    t.index ["nacebel_code_id"], name: "index_entity_profile_codes_on_nacebel_code_id"
+  end
 
   create_table "entity_profiles", force: :cascade do |t|
     t.string "name"
@@ -80,4 +98,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_143836) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "entity_codes", "legal_entities"
+  add_foreign_key "entity_codes", "nacebel_codes"
+  add_foreign_key "entity_profile_codes", "entity_profiles"
+  add_foreign_key "entity_profile_codes", "nacebel_codes"
 end

@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  legal_entity: one
+  nacebel_code: one
+
+two:
+  legal_entity: two
+  nacebel_code: two
