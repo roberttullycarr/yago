@@ -11,7 +11,9 @@ module InsuranceApi
       "enterpriseNumber": entity[:enterprise_number],
       "legalName": entity[:legal_name],
       "naturalPerson": entity[:natural_person],
-      "nacebelCodes": nacebel_codes
+      "nacebelCodes": nacebel_codes,
+      "coverageCeilingFormula": "small",
+      "deductibleFormula": "medium"
     }.to_json
 
     @response = RestClient::Request.execute(
