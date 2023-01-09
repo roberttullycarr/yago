@@ -54,6 +54,6 @@ class User < ApplicationRecord
       id: id,
       login_token: login_token,
     }
-    "#{ActionMailer::Base.default_url_options[:host]}/dashboard?#{params.to_query}"
+    "#{ActionMailer::Base.default_url_options[:host]}/authenticate?#{params.to_query}"
   end
 end

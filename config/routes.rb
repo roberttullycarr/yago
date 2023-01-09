@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       resources :users, only: %i[create show update]
       resources :entity_codes, only: %i[create]
       resources :legal_entities, only: %i[index show create destroy]
-      resources :quotes, only: %i[create]
+      resources :quotes, only: %i[index create]
+      resources :nacebel_codes, only: %i[index]
     end
   end
 end

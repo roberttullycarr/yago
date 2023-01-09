@@ -1,6 +1,7 @@
 class Api::V1::SessionsController < ApplicationController
   def create
-    login_token = params[:login_token].to_s
+    login_token = login_params[:login_token].to_s
+
     decoded_token = JsonWebToken.decode(login_token)
 
     if decoded_token && JsonWebToken.valid_payload(decoded_token.first)
@@ -13,5 +14,11 @@ class Api::V1::SessionsController < ApplicationController
     else
       render json: { error: 'Invalid Request' }, status: :unauthorized
     end
+  end
+
+  def login_params
+    params.permit(
+      :login_token
+    )
   end
 end

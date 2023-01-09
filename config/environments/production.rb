@@ -3,7 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = { host: 'fathomless-beach-09511.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'yago-frontend-ms326sg9p-roberttullycarr.vercel.app' }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -96,4 +96,14 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins 'yago-frontend-ms326sg9p-roberttullycarr.vercel.app'
+      resource '*', headers: :any, methods: %i[get post patch put delete destroy], credentials: true
+
+      origins '*'
+      resource '*', headers: :any, methods: %i[get post patch put delete destroy]
+    end
+  end
 end

@@ -1,7 +1,13 @@
-require 'json'
-
 class Api::V1::QuotesController < ApplicationController
-  # before_action :authenticate_request!
+  before_action :authenticate_request!, only: %i[index]
+
+  def index
+    resources = Quote.where(legal_entity_id: resource_params[:legal_entity_id])
+
+    serializer = Api::V1::QuoteSerializer.new(resources, { is_collection: true }).serializable_hash.to_json
+
+    render(json: serializer)
+  end
 
   def create
     external_quote = InsuranceApi.get_quote(resource_params[:legal_entity_id])
@@ -29,6 +35,7 @@ class Api::V1::QuotesController < ApplicationController
 
   def resource_params
     params.permit(
+      :id,
       :legal_entity_id
     )
   end
