@@ -43,7 +43,7 @@ class Api::V1::QuotesController < ApplicationController
   def create_quote(legal_entity_id, quote_params)
     Quote.create(
       available: quote_params['available'],
-      coverage_ceiling: quote_params['coverage_ceiling'],
+      coverage_ceiling: quote_params['coverageCeiling'],
       deductible: quote_params['deductible'],
       quote_id: quote_params['quoteId'],
       after_delivery_premium: quote_params['grossPremiums']['afterDelivery'],
