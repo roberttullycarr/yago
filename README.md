@@ -1,24 +1,10 @@
-# README
+Robert Carr - Yago Backend challenge api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This api was built using the following gems:
 
-Things you may want to cover:
+- JWT (managing authentication flow)
+- rack-cors (configuring cors headers for different environments
+- jsonapi-serializer (structuring serialized data)
+- rest-client (managing external api calls)
+- rolify (managing the assignment of user roles)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
